@@ -7,7 +7,7 @@ app = QApplication(sys.argv)
 
 penguin =QLabel()
 
-image = QPixmap("assets/alternative-temp.png")
+image = QPixmap("assets/Penguin-default.png")
 penguin.setPixmap(image)
 
 penguin.setWindowFlags(
