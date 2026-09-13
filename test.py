@@ -35,6 +35,13 @@ class Penguin(QLabel):
         self.setPixmap(self.palette_image)
         self.adjustSize()
 
+# "use it later to center all images if not centered"
+        # center =  self.geometry().center()  
+        # self.move(
+            # center.x() - self.width // 2,
+            # center.y() - self.height //2
+        # )
+
     def mousePressEvent(self, event):
        if event.button() == Qt.LeftButton:
 
