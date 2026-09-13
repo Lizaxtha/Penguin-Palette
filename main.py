@@ -1,11 +1,8 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QLabel
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import Qt
-from palette import generate_palette
-
-print(generate_palette())
-
+from PyQt5.QtCore import Qt, QTimer
+from palette_popup import PalettePopup
 class Penguin(QLabel):
     def __init__(self):
         super().__init__()
@@ -24,8 +21,14 @@ class Penguin(QLabel):
         )
 
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.drag_position=None
         self.is_dragging=False
+        self.palette_mode = False
+
+        self.palette_popup = PalettePopup(self)
+
+        self.hide_timer = QTimer()
+        self.hide_timer.setSingleShot(True)
+        self.hide_timer.timeout.connect(self.palette_popup.hide)
 
     def show_normal_penguin(self):
         self.setPixmap(self.normal_image)
@@ -50,9 +53,26 @@ class Penguin(QLabel):
 
     def mouseReleaseEvent(self, event):
         if event.button()==Qt.LeftButton:
+
             if not self.is_dragging:
                 self.show_palette_penguin()
+                self.palette_mode = True
+
             self.is_dragging = False
+
+    def enterEvent(self, event):
+        if self.palette_mode:
+            self.hide_timer.stop()
+            self.palette_popup.show()
+
+            self.palette_popup.move(
+                self.x(),
+                self.y()+self.height()
+            )
+
+    def leaveEvent(self, event):
+        if self.palette_mode:
+            self.hide_timer.start(500)
     
 app = QApplication(sys.argv)
 
