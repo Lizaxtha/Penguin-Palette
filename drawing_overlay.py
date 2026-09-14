@@ -12,10 +12,11 @@ class DrawingOverlay(QWidget):
             Qt.WindowStaysOnTopHint |
             Qt.Tool
         )
-        # testing with white bg and transparent bg
-        self.setStyleSheet("background-color: rgba(255,255,255,80);")
-        # self.setAttribute(Qt.WA_TranslucentBackground, True)
-        # self.setAttribute(Qt.WA_NoSystemBackground, True)
+
+        # for transparent overlay
+        self.setStyleSheet("background-color:white;")
+        self.setWindowOpacity(0.15)
+        
 
         self.last_position = None
         self.drawing = False
@@ -32,11 +33,17 @@ class DrawingOverlay(QWidget):
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
+
+            # print("mouse pressed on overlay")
+
             self.drawing = True
             self.last_position = event.pos()
 
     def mouseMoveEvent(self, event):
         if self.drawing:
+
+            # print("drawing")
+            
             self.strokes.append(
                 (
                     self.last_position,
@@ -54,6 +61,8 @@ class DrawingOverlay(QWidget):
 
     def paintEvent(self, event):
         painter = QPainter(self)
+
+        painter.setRenderHint(QPainter.Antialiasing)
 
         pen = QPen(
             self.color,

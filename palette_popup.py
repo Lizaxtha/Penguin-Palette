@@ -56,9 +56,15 @@ class PalettePopup(QWidget):
     def copy_color(self, color):
         QGuiApplication.clipboard().setText(color)
 
-        self.overlay.color = QColor(color)
+        print("COLOR CLICKED:", color)
 
+        self.overlay.color = QColor(color)
         self.overlay.show()
+        self.overlay.raise_()
+        self.overlay.activateWindow()
+
+        print("showing overlay", self.overlay.isVisible())
+
 
         self.hide()
 
