@@ -78,4 +78,12 @@ class DrawingOverlay(QWidget):
 
         painter.end()
 
+    def save_drawing(self):
+
+        screenshot = self.grab()
+
+        screenshot.save("my_art.png")
+
+        print("art saved!")
+
 

@@ -66,21 +66,20 @@ class Penguin(QLabel):
     def enterEvent(self, event):
         if self.palette_mode:
             self.hide_timer.stop()
-            self.palette_popup.show()
 
             self.palette_popup.move(
-                self.x(),
-                self.y()+self.height()
+                self.x() + self.width() + 10,
+                self.y()
             )
+            self.palette_popup.show()
 
     def leaveEvent(self, event):
         if self.palette_mode:
-            self.hide_timer.start(500)
+            self.hide_timer.start(1500)
     
 app = QApplication(sys.argv)
 
 overlay = DrawingOverlay()
-# overlay.show()
 
 penguin = Penguin(overlay)
 penguin.show()
