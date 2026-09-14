@@ -3,9 +3,11 @@ from PyQt5.QtWidgets import QApplication, QLabel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, QTimer
 from palette_popup import PalettePopup
+from drawing_overlay import DrawingOverlay
 class Penguin(QLabel):
-    def __init__(self):
+    def __init__(self, overlay):
         super().__init__()
+        self.overlay = overlay
 
         self.normal_image = QPixmap("assets/Penguin-default.png")
         self.palette_image =QPixmap("assets/Penguin-paints.png")
@@ -24,11 +26,12 @@ class Penguin(QLabel):
         self.is_dragging=False
         self.palette_mode = False
 
-        self.palette_popup = PalettePopup(self)
+        self.palette_popup = PalettePopup(self, self.overlay)
 
         self.hide_timer = QTimer()
         self.hide_timer.setSingleShot(True)
         self.hide_timer.timeout.connect(self.palette_popup.hide)
+
 
     def show_normal_penguin(self):
         self.setPixmap(self.normal_image)
@@ -76,7 +79,10 @@ class Penguin(QLabel):
     
 app = QApplication(sys.argv)
 
-penguin = Penguin()
+overlay = DrawingOverlay()
+# overlay.show()
+
+penguin = Penguin(overlay)
 penguin.show()
 
 sys.exit(app.exec_())
