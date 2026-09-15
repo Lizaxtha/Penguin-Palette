@@ -3,16 +3,19 @@
   
 - It is made using Python and PyQt5.
 ## Preview
+<img width="780" height="400" alt="Screenshot (3278)" src="https://github.com/user-attachments/assets/ed8e6431-af36-4d20-81c2-d734f70dbc54" />
+<img width="433" height="441" alt="Screenshot (3279)" src="https://github.com/user-attachments/assets/a4c63a15-3e74-41f2-a74f-f0cb9c459e29" /><img width="602" height="477" alt="Screenshot (3280)" src="https://github.com/user-attachments/assets/cf90f9ef-2555-42d6-8576-5e6eead0b8bf" /><img width="780" height="480" alt="Screenshot (3282)" src="https://github.com/user-attachments/assets/c90e7a3b-f9db-4ae0-95dc-e0f4a809e771" />
 
 ## How to install it?
 
 ### OPTION 1
+1. download zip file from **download** folder given in the repository. Download according to your OS : **windows** or **linux **
+
+### OPTION 2
 1. Make sure Python [version 3.13 or 3.14 or latest] is installed.
 2. Clone this repository.
 3. Go to your terminal in VS code and install **pip install PyQt5**
 4. Run your program with **python main.py**
-
-### OPTION 2
  
 ## Instructions to use
 1. You get penguin as your default animal. 
