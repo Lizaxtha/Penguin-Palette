@@ -12,7 +12,7 @@
 ## How to install it?
 
 ### OPTION 1
-1. download zip file from **download** folder given in the repository. Download according to your OS : **windows** or **linux **
+1. download zip file from **download** folder given in the repository. Download according to your OS : **windows** or **linux**
 
 ### OPTION 2
 1. Make sure Python [version 3.13 or 3.14 or latest] is installed.
