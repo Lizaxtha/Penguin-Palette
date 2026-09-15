@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QFileDialog
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QPen, QColor, QImage
+from PyQt5.QtGui import QPainter, QPen, QImage
 
 class DrawingOverlay(QWidget):
 
@@ -19,7 +19,7 @@ class DrawingOverlay(QWidget):
         self.last_position = None
         self.drawing = False
 
-        self.color = QColor("red")
+        self.color = None
         self.brush_size=10
         self.eraser = False
 
@@ -90,9 +90,17 @@ class DrawingOverlay(QWidget):
         painter.end()
 
     def save_drawing(self):
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save Drawing",
+            "My art.png",
+            "PNG Images (*.png)"
+        )
 
-        screenshot = self.grab()
-        screenshot.save("my_art.png")
-        print("art saved!")
+        if file_path:
+            self.canvas.save(file_path)
+            print("Drawing Saved!")
 
-       
+    def clear_drawing(self):
+        self.canvas.fill(Qt.transparent)
+        self.update()

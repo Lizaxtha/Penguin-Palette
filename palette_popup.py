@@ -71,19 +71,33 @@ class PalettePopup(QWidget):
 
         main_layout.addLayout(other_layout)
 
-        #save and close buttons + eraser button
+        #eraser and clear button
+
+        edit_layout = QHBoxLayout()
+        edit_layout.setSpacing(8)
+
+        eraser_btn = QPushButton("Eraser")
+        clear_btn = QPushButton("Clear")
+
+        eraser_btn.clicked.connect(self.toggle_eraser)
+        clear_btn.clicked.connect(self.clear_drawing)
+
+        edit_layout.addWidget(eraser_btn)
+        edit_layout.addWidget(clear_btn)
+
+        main_layout.addLayout(edit_layout)
+
+        #save and close buttons
         button_layout = QHBoxLayout()
         button_layout.setSpacing(8)
 
         save_btn=QPushButton("Save")
-        eraser_btn = QPushButton("Eraser")
         close_btn=QPushButton("Close")
 
         save_btn.setFixedHeight(28)
         close_btn.setFixedHeight(28)
 
         save_btn.clicked.connect(self.save_drawing)
-        eraser_btn.clicked.connect(self.toggle_eraser)
         close_btn.clicked.connect(self.close_drawing)
 
         save_btn.setStyleSheet("""
@@ -110,7 +124,6 @@ class PalettePopup(QWidget):
         """)
 
         button_layout.addWidget(save_btn)
-        button_layout.addWidget(eraser_btn)
         button_layout.addWidget(close_btn)
 
         main_layout.addLayout(button_layout)
@@ -163,11 +176,11 @@ class PalettePopup(QWidget):
         layout.addWidget(color_button)
 
     def copy_color(self, color):
+
         QGuiApplication.clipboard().setText(color)
-
-        # print("COLOR CLICKED:", color)
-
         self.overlay.color = QColor(color)
+
+        self.overlay.eraser = False
 
         self.overlay.show()
         self.hide()
@@ -187,3 +200,5 @@ class PalettePopup(QWidget):
         else:
             print("Eraser OFF")
 
+    def clear_drawing(self):
+        self.overlay.clear_drawing()

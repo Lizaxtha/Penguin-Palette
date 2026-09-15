@@ -9,7 +9,7 @@ class Penguin(QLabel):
         super().__init__()
         self.overlay = overlay
 
-        self.normal_image = QPixmap("assets/Penguin-default.png")
+        self.normal_image = QPixmap("assets/Penguin.png")
         self.palette_image =QPixmap("assets/Penguin-paints.png")
 
         self.drag_position = None
@@ -48,26 +48,36 @@ class Penguin(QLabel):
         self.current_animal=animal
 
         if animal == "Penguin":
-            self.normal_image = QPixmap("assets/Penguin-default")
+            self.normal_image = QPixmap("assets/Penguin.png")
             self.palette_image = QPixmap("assets/Penguin-paints.png")
         elif animal == "Brown Bear":
-            self.normal_image = QPixmap("assets/bear-default")
+            self.normal_image = QPixmap("assets/bear.png")
             self.palette_image = QPixmap("assets/bear-paints.png")
         elif animal == "White Rabbit":
-            self.normal_image = QPixmap("assets/white-rabbit-default")
-            self.palette_image = QPixmap("assets/white-rabbit-paints.png")
+            self.normal_image = QPixmap("assets/white-rabbit.png")
+            self.palette_image = QPixmap("assets/white-rabbit-paints1.png")
         elif animal == "Black Rabbit":
-            self.normal_image = QPixmap("assets/Black-rabbit-default")
-            self.palette_image = QPixmap("assets/Black-rabbit-paints.png")
+            self.normal_image = QPixmap("assets/Black-rabbit.png")
+            self.palette_image = QPixmap("assets/Black-rabbit-paints1.png")
         elif animal == "White Owl":
-            self.normal_image = QPixmap("assets/White-owl-default")
+            self.normal_image = QPixmap("assets/White-owl.png")
             self.palette_image = QPixmap("assets/White-owl-paints.png")
         elif animal == "Black Owl":
-            self.normal_image = QPixmap("assets/Black-owl-default")
+            self.normal_image = QPixmap("assets/Black-owl.png")
             self.palette_image = QPixmap("assets/Black-owl-paints.png")
         elif animal == "Fox":
-            self.normal_image = QPixmap("assets/fox-default")
+            self.normal_image = QPixmap("assets/fox.png")
             self.palette_image = QPixmap("assets/fox-paints.png")
+        elif animal == "Dog":
+            self.normal_image = QPixmap("assets/dog.png")
+            self.palette_image = QPixmap("assets/dog-paints.png")
+        elif animal == "Cat":
+            self.normal_image = QPixmap("assets/cat.png")
+            self.palette_image = QPixmap("assets/cat-paints.png")
+        elif animal == "Panda":
+            self.normal_image = QPixmap("assets/panda.png")
+            self.palette_image = QPixmap("assets/panda-paints.png")
+
 
         self.show_normal_penguin()
         self.palette_mode = False
@@ -124,11 +134,14 @@ class Penguin(QLabel):
 
         penguin_action = menu.addAction("Penguin")
         bear_action = menu.addAction("Brown Bear")
-        W_rabbit_action = menu.addAction("White Rabbit")
-        B_rabbit_action = menu.addAction("Black Rabbit")
-        W_owl_action = menu.addAction("White Owl")
-        B_owl_action = menu.addAction("Black Owl")
+        white_rabbit_action = menu.addAction("White Rabbit")
+        black_rabbit_action = menu.addAction("Black Rabbit")
+        white_owl_action = menu.addAction("White Owl")
+        black_owl_action = menu.addAction("Black Owl")
         fox_action = menu.addAction("Fox")
+        dog_action = menu.addAction("Dog")
+        cat_action = menu.addAction("Cat")
+        panda_action = menu.addAction("Panda")
 
         selected_action = menu.exec_(event.globalPos())
 
@@ -136,16 +149,22 @@ class Penguin(QLabel):
             self.change_animal("Penguin")
         elif selected_action == bear_action:
             self.change_animal("Brown Bear")
-        elif selected_action == W_rabbit_action:
+        elif selected_action == white_rabbit_action:
             self.change_animal("White Rabbit")
-        elif selected_action == B_rabbit_action:
+        elif selected_action == black_rabbit_action:
             self.change_animal("Black Rabbit")
-        elif selected_action == W_owl_action:
+        elif selected_action == white_owl_action:
             self.change_animal("White Owl")
-        elif selected_action == B_owl_action:
+        elif selected_action == black_owl_action:
             self.change_animal("Black Owl")
         elif selected_action == fox_action:
             self.change_animal("Fox")
+        elif selected_action == dog_action:
+            self.change_animal("Dog")
+        elif selected_action == cat_action:
+            self.change_animal("Cat")
+        elif selected_action == panda_action:
+            self.change_animal("Panda")
 
         event.accept()
         
