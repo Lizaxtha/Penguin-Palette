@@ -9,7 +9,7 @@ class DrawingOverlay(QWidget):
 
         self.setWindowFlags(
             Qt.FramelessWindowHint |
-            Qt.WindowStaysOnTopHint |
+            # Qt.WindowStaysOnTopHint |
             Qt.Tool
         )
 
@@ -41,8 +41,6 @@ class DrawingOverlay(QWidget):
 
     def mouseMoveEvent(self, event):
         if self.drawing:
-
-            # print("drawing")
             
             self.strokes.append(
                 (

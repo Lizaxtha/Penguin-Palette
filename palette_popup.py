@@ -166,9 +166,6 @@ class PalettePopup(QWidget):
         self.overlay.color = QColor(color)
 
         self.overlay.show()
-        self.overlay.raise_()
-        self.overlay.activateWindow()
-
         self.hide()
 
     def save_drawing(self):
