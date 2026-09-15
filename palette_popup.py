@@ -71,17 +71,19 @@ class PalettePopup(QWidget):
 
         main_layout.addLayout(other_layout)
 
-        #save and close buttons
+        #save and close buttons + eraser button
         button_layout = QHBoxLayout()
         button_layout.setSpacing(8)
 
         save_btn=QPushButton("Save")
+        eraser_btn = QPushButton("Eraser")
         close_btn=QPushButton("Close")
 
         save_btn.setFixedHeight(28)
         close_btn.setFixedHeight(28)
 
         save_btn.clicked.connect(self.save_drawing)
+        eraser_btn.clicked.connect(self.toggle_eraser)
         close_btn.clicked.connect(self.close_drawing)
 
         save_btn.setStyleSheet("""
@@ -108,6 +110,7 @@ class PalettePopup(QWidget):
         """)
 
         button_layout.addWidget(save_btn)
+        button_layout.addWidget(eraser_btn)
         button_layout.addWidget(close_btn)
 
         main_layout.addLayout(button_layout)
@@ -151,6 +154,7 @@ class PalettePopup(QWidget):
             }}
             """
         )
+        
         # to make each button remember its own color
         color_button.clicked.connect(
         lambda checked, c=color: self.copy_color(c)
@@ -173,7 +177,13 @@ class PalettePopup(QWidget):
 
     def close_drawing(self):
         self.overlay.hide()
-        self.overlay.strokes.clear()
         self.hide()
 
+    def toggle_eraser(self):
+        self.overlay.eraser = not self.overlay.eraser
+
+        if self.overlay.eraser:
+            print("Eraser On")
+        else:
+            print("Eraser OFF")
 

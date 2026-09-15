@@ -11,11 +11,11 @@ secondary_colors = [
 ]
 
 other_colors = [
-    "#FFB6C1",  # Light Pink
-    "#CDB4DB",  # Lavender
-    "#A2D2FF",  # Baby Blue
-    "#B7E4C7",  # Sage Green
-    "#FFD6A5",  # Peach
+    "#F5556D", 
+    "#AE69D6",  
+    "#58ADFD",  
+    "#5CE48C",  
+    "#FDAA44",  
 ]
 
 built_in_colors = (

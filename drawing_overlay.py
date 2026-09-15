@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QPen, QColor
+from PyQt5.QtGui import QPainter, QPen, QColor, QImage
 
 class DrawingOverlay(QWidget):
 
@@ -9,7 +9,6 @@ class DrawingOverlay(QWidget):
 
         self.setWindowFlags(
             Qt.FramelessWindowHint |
-            # Qt.WindowStaysOnTopHint |
             Qt.Tool
         )
 
@@ -17,40 +16,64 @@ class DrawingOverlay(QWidget):
         self.setStyleSheet("background-color:white;")
         self.setWindowOpacity(0.15)
         
-
         self.last_position = None
         self.drawing = False
 
         self.color = QColor("red")
         self.brush_size=10
-        self.strokes = []
+        self.eraser = False
 
         #to draw on whole screen
         screen = self.screen().geometry()
         self.setGeometry(screen)
 
+        self.canvas = QImage(
+            self.size(),
+            QImage.Format_ARGB32
+        )
+        self.canvas.fill(Qt.transparent)
+
         self.hide()
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
-
-            # print("mouse pressed on overlay")
-
             self.drawing = True
             self.last_position = event.pos()
 
     def mouseMoveEvent(self, event):
+
         if self.drawing:
-            
-            self.strokes.append(
-                (
-                    self.last_position,
-                    event.pos(),
-                )
+            painter = QPainter(self.canvas)
+            painter.setRenderHint(QPainter.Antialiasing)
+
+        if self.eraser:
+            painter.setCompositionMode(
+                QPainter.CompositionMode_Clear
             )
 
-            self.last_position = event.pos()
-            self.update()
+        else:
+            painter.setCompositionMode(
+                QPainter.CompositionMode_SourceOver
+            )
+
+        painter.setPen(
+            QPen(
+                self.color,
+                self.brush_size,
+                Qt.SolidLine,
+                Qt.RoundCap,
+                Qt.RoundJoin
+            )
+        )
+
+        painter.drawLine(
+            self.last_position,
+            event.pos()
+        )
+
+        painter.end()
+        self.last_position = event.pos()
+        self.update()
 
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -60,28 +83,16 @@ class DrawingOverlay(QWidget):
     def paintEvent(self, event):
         painter = QPainter(self)
 
-        painter.setRenderHint(QPainter.Antialiasing)
-
-        pen = QPen(
-            self.color,
-            self.brush_size,
-            Qt.SolidLine,
-            Qt.RoundCap,
-            Qt.RoundJoin
+        painter.drawImage(
+            0,0,self.canvas
         )
-        painter.setPen(pen)
-
-        for start, end in self.strokes:
-            painter.drawLine(start,end)    
 
         painter.end()
 
     def save_drawing(self):
 
         screenshot = self.grab()
-
         screenshot.save("my_art.png")
-
         print("art saved!")
 
-
+       
