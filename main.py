@@ -1,14 +1,23 @@
 import sys
+import os
 from PyQt5.QtWidgets import QApplication, QLabel, QMenu
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, QTimer
 from palette_popup import PalettePopup
 from drawing_overlay import DrawingOverlay
+
+def asset_path(filename):
+    if getattr(sys, "frozen", False):
+        base_path = os.path.dirname(sys.executable)
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+
+    return os.path.join(base_path, "assets", filename)
 class SpeechBubble(QLabel):
     def __init__ (self):
         super().__init__()
 
-        self.cloud_image = QPixmap("assets/message.png")
+        self.cloud_image = QPixmap(asset_path("message.png"))
 
         self.setWindowFlags(
             Qt.FramelessWindowHint |
@@ -51,8 +60,8 @@ class Penguin(QLabel):
         super().__init__()
         self.overlay = overlay
 
-        self.normal_image = QPixmap("assets/Penguin.png")
-        self.palette_image =QPixmap("assets/Penguin-paints.png")
+        self.normal_image = QPixmap(asset_path("Penguin.png"))
+        self.palette_image =QPixmap(asset_path("Penguin-paints.png"))
 
         self.drag_position = None
 
@@ -103,35 +112,35 @@ class Penguin(QLabel):
         self.current_animal=animal
 
         if animal == "Penguin":
-            self.normal_image = QPixmap("assets/Penguin.png")
-            self.palette_image = QPixmap("assets/Penguin-paints.png")
+            self.normal_image = QPixmap(asset_path("Penguin.png"))
+            self.palette_image = QPixmap(asset_path("Penguin-paints.png"))
         elif animal == "Brown Bear":
-            self.normal_image = QPixmap("assets/bear.png")
-            self.palette_image = QPixmap("assets/bear-paints.png")
+            self.normal_image = QPixmap(asset_path("bear.png"))
+            self.palette_image = QPixmap(asset_path("bear-paints.png"))
         elif animal == "White Rabbit":
-            self.normal_image = QPixmap("assets/white-rabbit.png")
-            self.palette_image = QPixmap("assets/white-rabbit-paints1.png")
+            self.normal_image = QPixmap(asset_path("white-rabbit.png"))
+            self.palette_image = QPixmap(asset_path("white-rabbit-paints1.png"))
         elif animal == "Black Rabbit":
-            self.normal_image = QPixmap("assets/Black-rabbit.png")
-            self.palette_image = QPixmap("assets/Black-rabbit-paints1.png")
+            self.normal_image = QPixmap(asset_path("Black-rabbit.png"))
+            self.palette_image = QPixmap(asset_path("Black-rabbit-paints1.png"))
         elif animal == "White Owl":
-            self.normal_image = QPixmap("assets/White-owl.png")
-            self.palette_image = QPixmap("assets/White-owl-paints.png")
+            self.normal_image = QPixmap(asset_path("White-owl.png"))
+            self.palette_image = QPixmap(asset_path("White-owl-paints.png"))
         elif animal == "Black Owl":
-            self.normal_image = QPixmap("assets/Black-owl.png")
-            self.palette_image = QPixmap("assets/Black-owl-paints.png")
+            self.normal_image = QPixmap(asset_path("Black-owl.png"))
+            self.palette_image = QPixmap(asset_path("Black-owl-paints.png"))
         elif animal == "Fox":
-            self.normal_image = QPixmap("assets/fox.png")
-            self.palette_image = QPixmap("assets/fox-paints.png")
+            self.normal_image = QPixmap(asset_path("fox.png"))
+            self.palette_image = QPixmap(asset_path("fox-paints.png"))
         elif animal == "Dog":
-            self.normal_image = QPixmap("assets/dog.png")
-            self.palette_image = QPixmap("assets/dog-paints.png")
+            self.normal_image = QPixmap(asset_path("dog.png"))
+            self.palette_image = QPixmap(asset_path("dog-paints.png"))
         elif animal == "Cat":
-            self.normal_image = QPixmap("assets/cat.png")
-            self.palette_image = QPixmap("assets/cat-paints.png")
+            self.normal_image = QPixmap(asset_path("cat.png"))
+            self.palette_image = QPixmap(asset_path("cat-paints.png"))
         elif animal == "Panda":
-            self.normal_image = QPixmap("assets/panda.png")
-            self.palette_image = QPixmap("assets/panda-paints.png")
+            self.normal_image = QPixmap(asset_path("panda.png"))
+            self.palette_image = QPixmap(asset_path("panda-paints.png"))
 
 
         self.show_normal_penguin()
@@ -199,6 +208,9 @@ class Penguin(QLabel):
         cat_action = menu.addAction("Cat")
         panda_action = menu.addAction("Panda")
 
+        menu.addSeparator()
+        quit_action = menu.addAction("Quit Extension")
+
         selected_action = menu.exec_(event.globalPos())
 
         if selected_action == penguin_action:
@@ -221,6 +233,8 @@ class Penguin(QLabel):
             self.change_animal("Cat")
         elif selected_action == panda_action:
             self.change_animal("Panda")
+        elif selected_action == quit_action:
+            QApplication.quit()
 
         event.accept()
 
