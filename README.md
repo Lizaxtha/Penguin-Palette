@@ -27,6 +27,7 @@
 
 ## Features
 - floating desktop animal/pet that can be dragged around
+- A greeting message from the chosen animal
 - choose multiple animals
 - built-in color palette
 - draw directly over your screen while other apps run behind simultaneously

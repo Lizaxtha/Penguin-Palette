@@ -4,6 +4,48 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, QTimer
 from palette_popup import PalettePopup
 from drawing_overlay import DrawingOverlay
+class SpeechBubble(QLabel):
+    def __init__ (self):
+        super().__init__()
+
+        self.cloud_image = QPixmap("assets/message.png")
+
+        self.setWindowFlags(
+            Qt.FramelessWindowHint |
+            Qt.Tool |
+            Qt.WindowStaysOnTopHint
+        )
+
+        self.setAttribute(Qt.WA_TranslucentBackground)
+        self.quote_label = QLabel(self)
+
+        self.quote_label.setStyleSheet("""
+        QLabel {
+        color: black;
+        font-size:14px;
+        font-weight: bold;
+        background: transparent;
+        }
+        """)
+
+        self.hide()
+
+    def show_quote(self, quote):
+        self.setPixmap(self.cloud_image)
+        self.adjustSize()
+
+        self.quote_label.setText(quote)
+        self.quote_label.adjustSize()
+
+        x = (self.width() - self.quote_label.width()) // 2
+        y = (self.height() - self.quote_label.height()) -85
+
+        self.quote_label.move(x,y)
+
+        self.show()
+        self.raise_()
+
+        QTimer.singleShot(1800, self.hide)
 class Penguin(QLabel):
     def __init__(self, overlay):
         super().__init__()
@@ -28,6 +70,7 @@ class Penguin(QLabel):
         self.palette_mode = False
 
         self.current_animal = "Penguin"
+        self.speech_bubble = SpeechBubble()
 
         self.palette_popup = PalettePopup(self, self.overlay)
 
@@ -35,6 +78,18 @@ class Penguin(QLabel):
         self.hide_timer.setSingleShot(True)
         self.hide_timer.timeout.connect(self.palette_popup.hide)
 
+        self.quotes = {
+            "Penguin":"Ready to make \n something nice?!",
+            "Brown Bear":"Alright. \nLet's make art.",
+            "White Rabbit":"Ready?Let's hop\n right into it.",
+            "Black Rabbit":"Let's make something\n worth hiding",
+            "White Owl":"Hmm..\nLet me see \nwhat you create.",
+            "Black Owl":"Make art \nright now!",
+            "Fox":"Hehe, Do you like \nFishy arts?!",
+            "Dog":"Yay! Let's make \nsomething together!",
+            "Cat":"Alright, show me \nwhat you got.",
+            "Panda":"Relax. Let's make\n something chill."
+        }
 
     def show_normal_penguin(self):
         self.setPixmap(self.normal_image)
@@ -81,6 +136,7 @@ class Penguin(QLabel):
 
         self.show_normal_penguin()
         self.palette_mode = False
+        self.show_animal_quote()
 
     def mousePressEvent(self, event):
        if event.button() == Qt.LeftButton:
@@ -167,6 +223,15 @@ class Penguin(QLabel):
             self.change_animal("Panda")
 
         event.accept()
+
+    def show_animal_quote(self):
+        quote = self.quotes[self.current_animal]
+
+        self.speech_bubble.show_quote(quote)
+        self.speech_bubble.move(
+            self.x() - self.width() - 80,
+            self.y() - self.speech_bubble.height() //3
+        )
         
     
 app = QApplication(sys.argv)
