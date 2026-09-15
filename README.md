@@ -3,8 +3,8 @@
   
 - It is made using Python and PyQt5.
 ## Preview
-<img width="780" height="400" alt="Screenshot (3278)" src="https://github.com/user-attachments/assets/ed8e6431-af36-4d20-81c2-d734f70dbc54" />
-<img width="433" height="441" alt="Screenshot (3279)" src="https://github.com/user-attachments/assets/a4c63a15-3e74-41f2-a74f-f0cb9c459e29" /><img width="602" height="477" alt="Screenshot (3280)" src="https://github.com/user-attachments/assets/cf90f9ef-2555-42d6-8576-5e6eead0b8bf" /><img width="780" height="480" alt="Screenshot (3282)" src="https://github.com/user-attachments/assets/c90e7a3b-f9db-4ae0-95dc-e0f4a809e771" />
+<img width="380" height="200" alt="Screenshot (3278)" src="https://github.com/user-attachments/assets/ed8e6431-af36-4d20-81c2-d734f70dbc54" />
+<img width="200" height="150" alt="Screenshot (3279)" src="https://github.com/user-attachments/assets/a4c63a15-3e74-41f2-a74f-f0cb9c459e29" /><img width="250" height="200" alt="Screenshot (3280)" src="https://github.com/user-attachments/assets/cf90f9ef-2555-42d6-8576-5e6eead0b8bf" /><img width="380" height="200" alt="Screenshot (3282)" src="https://github.com/user-attachments/assets/c90e7a3b-f9db-4ae0-95dc-e0f4a809e771" />
 
 ## How to install it?
 
