@@ -21,15 +21,16 @@
 4. Run your program with **python main.py**
  
 ## Instructions to use
-1. You get penguin as your default animal. 
-2. You can choose other animal/pet options by **right-click** on the animal.
-3. To enter paint mode **left-click** and hover on the chosen animal
+1. Penguin is set as your default animal. 
+2. You can choose other animal/pet options by **right-clicking** on the animal.
+3. To enter paint mode, **left-click** and hover on the chosen animal
 4. Choose any color and start painting.
-5. You can use **eraser** tool to earse, clear tool to **clear** the whole screen.
+5. You can use **eraser** tool to earse, **clear** tool to the whole screen.
 6. You can save your drawing too.
-7. after done using, press *close* to remove the transparent screen.
-8. **right-click** again on the animal/pet to go back to default mode.
+7. After done using, press *close* to remove the transparent screen.
+8.  **right-click** again on the animal/pet to go back to default mode.
 9. Your pet will be waiting on the side for anytime, anywhere use.
+10. To close the extension completely **right-click** default image and choose quit extension.
 
 ## Features
 - floating desktop animal/pet that can be dragged around
